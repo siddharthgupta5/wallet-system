@@ -14,7 +14,7 @@ import (
 )
 
 func main() {
-	// Load configuration
+	// Loading configuration
 	cfg := config.LoadConfig()
 
 	// Initialize database
@@ -28,17 +28,17 @@ func main() {
 		log.Fatalf("Failed to auto migrate: %v", err)
 	}
 
-	// Initialize repositories
+	// Initialized repositories
 	userRepo := repositories.NewUserRepository(database)
 	walletRepo := repositories.NewWalletRepository(database)
 	transactionRepo := repositories.NewTransactionRepository(database)
 
-	// Initialize services
+	// Initialized services
 	userService := services.NewUserService(userRepo)
 	walletService := services.NewWalletService(walletRepo, userRepo)
 	transactionService := services.NewTransactionService(transactionRepo, walletRepo)
 
-	// Initialize controllers
+	// Initialized controllers
 	userController := controllers.NewUserController(userService)
 	walletController := controllers.NewWalletController(walletService)
 	transactionController := controllers.NewTransactionController(transactionService)
@@ -49,7 +49,7 @@ func main() {
 	// Set up routes
 	routes.SetupRoutes(router, userController, walletController, transactionController)
 
-	// Start server
+	// Starting server
 	log.Printf("Server starting on port %s", cfg.ServerPort)
 	if err := router.Run(":" + cfg.ServerPort); err != nil {
 		log.Fatalf("Failed to start server: %v", err)
