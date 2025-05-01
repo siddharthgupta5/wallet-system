@@ -43,7 +43,7 @@ func (s *transactionService) CreateTransaction(walletID uint, amount float64, de
 		return nil, errors.New("wallet not found")
 	}
 
-	// For debit transactions, check sufficient balance
+	// For debit transactions, checking sufficient balance
 	if txnType == "debit" && wallet.Balance < amount {
 		return nil, errors.New("insufficient balance")
 	}
@@ -93,7 +93,7 @@ func (s *transactionService) TransferFunds(sourceWalletID, destinationWalletID u
 		return nil, nil, errors.New("source wallet not found")
 	}
 
-	// Check sufficient balance
+	// Checking sufficient balance
 	if sourceWallet.Balance < amount {
 		return nil, nil, errors.New("insufficient balance in source wallet")
 	}
@@ -104,14 +104,14 @@ func (s *transactionService) TransferFunds(sourceWalletID, destinationWalletID u
 		return nil, nil, errors.New("destination wallet not found")
 	}
 
-	// Create debit transaction for source wallet
+	// Creating debit transaction for source wallet
 	debitDescription := fmt.Sprintf("Transfer to wallet %d: %s", destinationWalletID, description)
 	debitTxn, err := s.CreateTransaction(sourceWalletID, amount, debitDescription, "debit")
 	if err != nil {
 		return nil, nil, err
 	}
 
-	// Create credit transaction for destination wallet
+	// Creating credit transaction for destination wallet
 	creditDescription := fmt.Sprintf("Transfer from wallet %d: %s", sourceWalletID, description)
 	creditTxn, err := s.CreateTransaction(destinationWalletID, amount, creditDescription, "credit")
 	if err != nil {
