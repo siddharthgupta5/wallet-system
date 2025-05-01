@@ -4,7 +4,6 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"github.com/siddharthgupta5/wallet-api/internal/models"
 	"github.com/siddharthgupta5/wallet-api/internal/services"
 	"github.com/siddharthgupta5/wallet-api/internal/utils"
 )

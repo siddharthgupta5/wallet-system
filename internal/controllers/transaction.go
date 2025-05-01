@@ -4,7 +4,6 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"github.com/siddharthgupta5/wallet-api/internal/models"
 	"github.com/siddharthgupta5/wallet-api/internal/services"
 	"github.com/siddharthgupta5/wallet-api/internal/utils"
 )
@@ -27,8 +26,8 @@ type CreateTransactionRequest struct {
 type TransferRequest struct {
 	SourceWalletID      uint    `json:"source_wallet_id" binding:"required"`
 	DestinationWalletID uint    `json:"destination_wallet_id" binding:"required"`
-	Amount             float64 `json:"amount" binding:"required,gt=0"`
-	Description        string  `json:"description"`
+	Amount              float64 `json:"amount" binding:"required,gt=0"`
+	Description         string  `json:"description"`
 }
 
 func (c *TransactionController) CreateTransaction(ctx *gin.Context) {
@@ -68,7 +67,7 @@ func (c *TransactionController) TransferFunds(ctx *gin.Context) {
 	utils.RespondWithJSON(ctx, http.StatusCreated, gin.H{
 		"debit_transaction":  debitTxn,
 		"credit_transaction": creditTxn,
-		"message":           "Transfer completed successfully",
+		"message":            "Transfer completed successfully",
 	})
 }
 
