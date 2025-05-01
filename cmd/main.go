@@ -7,7 +7,6 @@ import (
 	"github.com/siddharthgupta5/wallet-api/internal/config"
 	"github.com/siddharthgupta5/wallet-api/internal/controllers"
 	"github.com/siddharthgupta5/wallet-api/internal/db"
-	"github.com/siddharthgupta5/wallet-api/internal/models"
 	"github.com/siddharthgupta5/wallet-api/internal/repositories"
 	"github.com/siddharthgupta5/wallet-api/internal/routes"
 	"github.com/siddharthgupta5/wallet-api/internal/services"
