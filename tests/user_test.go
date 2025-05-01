@@ -17,7 +17,7 @@ func setupTestDB() *gorm.DB {
 		panic("failed to connect to test database")
 	}
 
-	// Migrate the schema
+	// Migrated the schema
 	db.AutoMigrate(&models.User{}, &models.Wallet{}, &models.Transaction{})
 
 	return db
