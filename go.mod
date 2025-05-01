@@ -1,4 +1,4 @@
-module github.com/siddharthgupta5/wallet-system
+module github.com/siddharthgupta5/wallet-api
 
 go 1.24.2
 
