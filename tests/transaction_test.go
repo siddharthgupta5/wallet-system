@@ -4,11 +4,8 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
-	"github.com/siddharthgupta5/wallet-api/internal/models"
 	"github.com/siddharthgupta5/wallet-api/internal/repositories"
 	"github.com/siddharthgupta5/wallet-api/internal/services"
-	"gorm.io/driver/sqlite"
-	"gorm.io/gorm"
 )
 
 func TestTransactionService(t *testing.T) {
