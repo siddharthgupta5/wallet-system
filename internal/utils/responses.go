@@ -1,7 +1,6 @@
 package utils
 
 import (
-	"net/http"
 	"strconv"
 
 	"github.com/gin-gonic/gin"
