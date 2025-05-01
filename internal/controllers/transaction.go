@@ -4,9 +4,9 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"github.com/yourusername/wallet-api/internal/models"
-	"github.com/yourusername/wallet-api/internal/services"
-	"github.com/yourusername/wallet-api/internal/utils"
+	"github.com/siddharthgupta5/wallet-api/internal/models"
+	"github.com/siddharthgupta5/wallet-api/internal/services"
+	"github.com/siddharthgupta5/wallet-api/internal/utils"
 )
 
 type TransactionController struct {
