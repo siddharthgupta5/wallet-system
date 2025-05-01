@@ -1,24 +1,38 @@
-package utils
+package db
 
 import (
-	"strconv"
+	"fmt"
+	"log"
 
-	"github.com/gin-gonic/gin"
+	"github.com/siddharthgupta5/wallet-api/internal/config"
+	"github.com/siddharthgupta5/wallet-api/internal/models"
+	"gorm.io/driver/postgres"
+	"gorm.io/gorm"
 )
 
-func RespondWithError(c *gin.Context, code int, message string) {
-	c.JSON(code, gin.H{"error": message})
-}
+func InitDB(cfg config.Config) (*gorm.DB, error) {
+	dsn := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=disable TimeZone=UTC",
+		cfg.DBHost, cfg.DBUser, cfg.DBPassword, cfg.DBName, cfg.DBPort)
 
-func RespondWithJSON(c *gin.Context, code int, payload interface{}) {
-	c.JSON(code, payload)
-}
-
-func ParseUintParam(c *gin.Context, param string) (uint, error) {
-	idStr := c.Param(param)
-	id, err := strconv.ParseUint(idStr, 10, 32)
+	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {
-		return 0, err
+		return nil, fmt.Errorf("failed to connect to database: %v", err)
 	}
-	return uint(id), nil
+
+	log.Println("Connected to database successfully")
+	return db, nil
+}
+
+func AutoMigrate(db *gorm.DB) error {
+	err := db.AutoMigrate(
+		&models.User{},
+		&models.Wallet{},
+		&models.Transaction{},
+	)
+	if err != nil {
+		return fmt.Errorf("failed to auto migrate: %v", err)
+	}
+
+	log.Println("Database migration completed")
+	return nil
 }
